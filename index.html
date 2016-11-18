@@ -3,27 +3,191 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Patatap</title>
-	<link rel="stylesheet" type="text/css" href="styles.css">
 	<script type="text/javascript" src="paper-full.min.js"></script>
-	<script type="text/paperscript" canvas="myCanvas">
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.0.1/howler.js"></script>
+	<link rel="stylesheet" type="text/css" href="styles.css">
 
+	<script type="text/paperscript" canvas="myCanvas">
 		var circles = [];
+		var keyData = {
+			a: {
+				color: 'blue',
+				sound: new Howl({
+    			src: ['sound/bubbles.mp3']
+    		})
+			},
+			s: {
+				color: 'green',
+				sound: new Howl({
+    			src: ['sound/clay.mp3']
+    		})
+			},
+			d: {
+				color: 'red',
+				sound: new Howl({
+    			src: ['sound/confetti.mp3']
+    		})
+			},
+			f: {
+				color: 'purple',
+				sound: new Howl({
+    			src: ['sound/corona.mp3']
+    		})
+			},
+			g: {
+				color: 'teal',
+				sound: new Howl({
+    			src: ['sound/dotted-spiral.mp3']
+    		})
+			},
+			h: {
+				color: 'orange',
+				sound: new Howl({
+    			src: ['sound/flash-1.mp3']
+    		})
+			},
+			j: {
+				color: 'steelblue',
+				sound: new Howl({
+    			src: ['sound/flash-2.mp3']
+    		})
+			},
+			k: {
+				color: 'pink',
+				sound: new Howl({
+    			src: ['sound/flash-3.mp3']
+    		})
+			},
+			l: {
+				color: 'chartreuse',
+				sound: new Howl({
+    			src: ['sound/glimmer.mp3']
+    		})
+			},
+			q: {
+				color: 'cyan',
+				sound: new Howl({
+    			src: ['sound/moon.mp3']
+    		})
+			},
+			w: {
+				color: 'darkslateblue',
+				sound: new Howl({
+    			src: ['sound/pinwheel.mp3']
+    		})
+			},
+			e: {
+				color: 'lightseagreen',
+				sound: new Howl({
+    			src: ['sound/piston-1.mp3']
+    		})
+			},
+			r: {
+				color: 'crimson',
+				sound: new Howl({
+    			src: ['sound/piston-2.mp3']
+    		})
+			},
+			t: {
+				color: 'darkgreen',
+				sound: new Howl({
+    			src: ['sound/piston-3.mp3']
+    		})
+			},
+			y: {
+				color: 'darkgoldenrod',
+				sound: new Howl({
+    			src: ['sound/prism-1.mp3']
+    		})
+			},
+			u: {
+				color: 'brown',
+				sound: new Howl({
+    			src: ['sound/prism-2.mp3']
+    		})
+			},
+			i: {
+				color: 'beige',
+				sound: new Howl({
+    			src: ['sound/prism-3.mp3']
+    		})
+			},
+			o: {
+				color: 'indigo',
+				sound: new Howl({
+    			src: ['sound/splits.mp3']
+    		})
+			},
+			p: {
+				color: 'lightgreen',
+				sound: new Howl({
+    			src: ['sound/squiggle.mp3']
+    		})
+			},
+			z: {
+				color: 'navy',
+				sound: new Howl({
+    			src: ['sound/strike.mp3']
+    		})
+			},
+			x: {
+				color: 'olivedrab',
+				sound: new Howl({
+    			src: ['sound/suspension.mp3']
+    		})
+			},
+			c: {
+				color: 'palevioletred',
+				sound: new Howl({
+    			src: ['sound/timer.mp3']
+    		})
+			},
+			v: {
+				color: 'royalblue',
+				sound: new Howl({
+    			src: ['sound/ufo.mp3']
+    		})
+			},
+			b: {
+				color: 'firebrick',
+				sound: new Howl({
+    			src: ['sound/veil.mp3']
+    		})
+			},
+			n: {
+				color: 'darkslategrey',
+				sound: new Howl({
+    			src: ['sound/wipe.mp3']
+    		})
+			},
+			m: {
+				color: 'cadetblue',
+				sound: new Howl({
+    			src: ['sound/zig-zag.mp3']
+    		})
+			}
+		}
 
 		function onKeyDown(event) {
-			var maxPoint = new Point(view.size.width, view.size.height);
-			var random = Point.random();
-			var point = maxPoint * random;
-			var newCircle = new Path.Circle(point, 100)
-			newCircle.fillColor='blue';
-			circles.push(newCircle);
+			if(keyData[event.key]){
+				var maxPoint = new Point(view.size.width, view.size.height);
+				var random = Point.random();
+				var point = maxPoint * random;
+				var newCircle = new Path.Circle(point, 500)
+
+				newCircle.fillColor = keyData[event.key].color;
+				keyData[event.key].sound.play();
+				circles.push(newCircle);
+			}
 		}
 
 		function onFrame(event) {
 			for(var i = 0; i < circles.length; i++){
-				circles[i].fillColor.hue += 8;
+				circles[i].fillColor.hue += 2;
 				circles[i].scale(.91);
 			}
 		}
+
 	</script>
 	</head>
 	<body>
