@@ -173,7 +173,7 @@
 				var maxPoint = new Point(view.size.width, view.size.height);
 				var random = Point.random();
 				var point = maxPoint * random;
-				var newCircle = new Path.Circle(point, 500)
+				var newCircle = new Path.Circle(point, 800)
 
 				newCircle.fillColor = keyData[event.key].color;
 				keyData[event.key].sound.play();
@@ -185,6 +185,11 @@
 			for(var i = 0; i < circles.length; i++){
 				circles[i].fillColor.hue += 2;
 				circles[i].scale(.91);
+				if(circles[i].area < 1) {
+					circles[i].remove();
+					circles.splice(i, 1);
+					console.log(circles);
+				}
 			}
 		}
 
